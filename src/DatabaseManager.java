@@ -1,4 +1,3 @@
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,15 +6,10 @@ import java.sql.SQLException;
 // import java.sql.Statement;
 
 public class DatabaseManager {
-    private Connection connection;
-    private String path;
+    private static Connection connection;
 
-    public DatabaseManager() {
-        path = Paths.get(".").toAbsolutePath().normalize().toString();
-    }
-
-    private void connect() {
-        String url = "jdbc:sqlite:" + path + "/db/database.db";
+    private static void connect() {
+        String url = "jdbc:sqlite:database.db";
         try {
             connection = DriverManager.getConnection(url);
         } catch (SQLException e) {
@@ -23,7 +17,7 @@ public class DatabaseManager {
         }
     }
 
-    private void close() {
+    private static void close() {
         try {
             connection.close();
         } catch (Exception e) {
@@ -31,7 +25,7 @@ public class DatabaseManager {
         }
     }
 
-    private PreparedStatement prepareStatement(String sql) throws SQLException {
+    private static PreparedStatement prepareStatement(String sql) throws SQLException {
         return connection.prepareStatement(sql);
     }
 
@@ -63,7 +57,7 @@ public class DatabaseManager {
      */
 
     // GENRE
-    public void AddGenre(String name) {
+    public static void AddGenre(String name) {
         connect();
         String sql = "INSERT INTO genres(name) VALUES (?)";
 
@@ -78,7 +72,7 @@ public class DatabaseManager {
     }
 
     // ARTIST
-    public void AddArtist(String name) {
+    public static void AddArtist(String name) {
         connect();
         String sql = "INSERT INTO artists(name) VALUES (?)";
 
@@ -93,7 +87,7 @@ public class DatabaseManager {
     }
 
     // ALBUM
-    public void AddAlbum(String title, int artistId) {
+    public static void AddAlbum(String title, int artistId) {
         connect();
         String sql = "INSERT INTO albums(title, artist_id) VALUES (?, ?)";
 
@@ -109,7 +103,7 @@ public class DatabaseManager {
     }
 
     // TRACK
-    public void AddTrack(String name, int album_id, int duration) {
+    public static void AddTrack(String name, int album_id, int duration) {
         connect();
         String sql = "INSERT INTO tracks(name, album_id, duration) VALUES (?, ?, ?)";
 
