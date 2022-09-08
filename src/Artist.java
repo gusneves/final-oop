@@ -1,6 +1,9 @@
 public class Artist extends BaseEntity {
     private String name;
 
+    public Artist() {
+    }
+
     public Artist(int id, String name) {
         super(id);
         this.name = name;
@@ -12,5 +15,10 @@ public class Artist extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Artist [id=" + id + ", name=" + name + "]";
     }
 }

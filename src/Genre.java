@@ -1,9 +1,12 @@
 public class Genre extends BaseEntity {
-    public String name;
+    private String name;
 
     public Genre(int id, String name) {
         super(id);
         this.name = name;
+    }
+
+    public Genre() {
     }
 
     public String getName() {
@@ -12,5 +15,10 @@ public class Genre extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre [id=" + id + ", name=" + name + "]";
     }
 }

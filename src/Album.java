@@ -2,6 +2,9 @@ public class Album extends BaseEntity {
     private String title;
     private int artistId;
 
+    public Album() {
+    }
+
     public Album(int id, String title, int artistId) {
         super(id);
         this.title = title;
@@ -22,5 +25,10 @@ public class Album extends BaseEntity {
 
     public void setArtistId(int artistId) {
         this.artistId = artistId;
+    }
+
+    @Override
+    public String toString() {
+        return "Album [id=" + id + ", title=" + title + ", artistId=" + artistId + "]";
     }
 }

@@ -3,6 +3,9 @@ public class Track extends BaseEntity {
     private int albumId;
     private int duration;
 
+    public Track() {
+    }
+
     public Track(int id, String name, int albumId, int duration) {
         super(id);
         this.name = name;
@@ -32,5 +35,10 @@ public class Track extends BaseEntity {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    @Override
+    public String toString() {
+        return "Track [id=" + id + ", name=" + name + ", albumId=" + albumId + ", duration=" + duration + "]";
     }
 }
