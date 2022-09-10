@@ -22,17 +22,16 @@ public class App {
                     opcao = menu.adicionar(sc);
                     switch(opcao){
                         case 1: 
-                            continua = menu.addArtista(sc, sc);
+                            continua = menu.addArtista(sc);
                             break;
                         case 2: 
-                            continua = menu.addAlbum(sc, sc, sc);
+                            continua = menu.addAlbum(sc);
                             break;
                         case 3: 
-                            continua = menu.addMusica(sc, sc, sc, sc);
+                            continua = menu.addMusica(sc);
                             break;
                         case 4: 
                             // Gênero
-                            //DatabaseManager.AddGenre(name);
                             break;
                         default:
                     }
@@ -44,64 +43,71 @@ public class App {
                 opcao = menu.excluir(sc);
                 switch(opcao){
                     case 1:     
-                        continua = menu.excluirArtista(sc, sc, sc);
+                        continua = menu.excluirArtista(sc);
                         break;
                     case 2: 
-                        continua = menu.excluirAlbum(sc, sc, sc);
+                        continua = menu.excluirAlbum(sc);
                         break;
                     case 3: 
-                        continua = menu.excluirMusica(sc, sc, sc);
+                        continua = menu.excluirMusica(sc);
                         break;
                     case 4: 
                         // Gênero
-                        //DatabaseManager.AddGenre(name);
                         break;
                 }
             }while(continua == 1);
             break;
 
-              
             case 3:
-            do{
-                opcao = menu.alterar(sc);
-                switch(opcao){
-                    case 1: 
-                        continua = menu.alterarArtista(sc, sc, sc);
-                        break;
-                    case 2: 
-                        continua = menu.alterarAlbum(sc, sc, sc, sc);
-                        break;
-                    case 3: 
-                         continua = menu.alteraMusica(sc, sc, sc, sc);
-                        break;
-                    case 4: 
-                            // Gênero
-                        break;
-                }
-            }while(continua == 1);
-            break;
-
-                case 4:
-                    System.out.println(menu.consultar());
-                    opcao = sc.nextInt();
+                do{
+                    opcao = menu.alterar(sc);
                     switch(opcao){
                         case 1: 
-                            // Artista
+                            continua = menu.alterarArtista(sc);
                             break;
                         case 2: 
-                            // Album
+                            continua = menu.alterarAlbum(sc);
                             break;
                         case 3: 
-                            // Música
+                            continua = menu.alteraMusica(sc);
+                            break;
+                         case 4: 
+                            // Gênero
+                            break;
+                    }
+                }while(continua == 1);
+                break;
+
+            case 4:
+                do{
+                    opcao = menu.consultar(sc);
+                    switch(opcao){
+                        case 1: 
+                            continua = menu.consultarArtista(sc);
+                            break;
+                        case 2: 
+                            continua = menu.consultarAlbum(sc);
+                            break;
+                        case 3: 
+                            continua = menu.consultarMusica(sc);
                             break;
                         case 4: 
                             // Gênero
                             break;
-                    }
+                        }
+                
+                }while(continua == 1);
+                break;
+
+                case 5:
+                    continua = 3;
+                    break;
+                
+                default:
+                    System.out.println("\n -Opção não é válida\n -Tente novamente");
+                    continua = 2;
                     break;
             }
-        
-
     }while(continua != 3);
 
     sc.close();

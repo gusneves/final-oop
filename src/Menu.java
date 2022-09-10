@@ -46,9 +46,12 @@ public class Menu {
         return opcao;
     }
 
-    public String consultar(){
+    public int consultar(Scanner sc){
 
-        return "\n Consultar" + opcoes();
+        System.out.println("\n Consultar" + opcoes());
+        int opcao = sc.nextInt();
+        sc.nextLine();
+        return opcao;
     }
 
     public String erro(){
@@ -56,7 +59,8 @@ public class Menu {
     }
     
 ///////////////////////////////////////////////////////////////////////////////////////
-    public int addArtista(Scanner sc, Scanner w){
+////////ADICIONAR......
+    public int addArtista(Scanner sc){
 
         System.out.print(" Artista\n  -Nome do artista: ");
         String nome; 
@@ -64,10 +68,10 @@ public class Menu {
         DatabaseManager.AddArtist(nome);
         System.out.println("\n >Artista \"" + nome + "\" adicionado");
 
-        return voltarMenuAdicionar(w);
+        return voltarMenuAdicionar(sc);
     }
 
-    public int addAlbum(Scanner sc, Scanner t, Scanner w){
+    public int addAlbum(Scanner sc){
 
         System.out.print(" Album\n -Nome do album: ");
         String nome = sc.nextLine();
@@ -77,20 +81,20 @@ public class Menu {
         int id;
         
         try{
-            id = t.nextInt();
+            id = sc.nextInt();
         }catch(InputMismatchException e){
             System.out.println("\n Valor invalido informe números inteiros. " +e.getMessage()+ " \n");
             System.out.println(" -ID (do tipo int): ");
-            id = t.nextInt();
+            id = sc.nextInt();
         }
 
         DatabaseManager.AddAlbum(nome, id);
         System.out.println("\n >Album \"" + nome + "\" adicionado");
 
-        return voltarMenuAdicionar(w);
+        return voltarMenuAdicionar(sc);
     }
 
-    public int addMusica(Scanner sc, Scanner t, Scanner p, Scanner w){
+    public int addMusica(Scanner sc){
 
         System.out.print("\n Música\n -Nome da música: ");
         String name = sc.nextLine();
@@ -99,30 +103,30 @@ public class Menu {
         int id;
         try{
             System.out.print("\n -ID do Album(int): ");
-            id = t.nextInt();
+            id = sc.nextInt();
         }catch(RuntimeException e){
             System.out.println("\nValor invalido informe números inteiros.\n");
             System.out.println(" -ID (do tipo int): ");
-            id = t.nextInt();
+            id = sc.nextInt();
         }
         int duration;
         try{
             System.out.print("\n -Duração da música em segundos(int): ");
-            duration = p.nextInt();
+            duration = sc.nextInt();
         }catch(RuntimeException e){
-            p.nextLine();
+            sc.nextLine();
             System.out.println("\n -Valor invalido informe números inteiros.\n");
             System.out.print(" -Duração (do tipo int): ");
-            duration = p.nextInt();
+            duration = sc.nextInt();
         }
         DatabaseManager.AddTrack(name, id, duration);
         System.out.println("\n >Música \"" + name + " \" adicionada< \n" );
      
-        return voltarMenuAdicionar(w);
+        return voltarMenuAdicionar(sc);
     }
     //////////////////////////////////////////////////////////////////////////////////////
-    /////// EXCLUIR.......
-    public int excluirArtista(Scanner sc, Scanner t, Scanner w){
+    ///////EXCLUIR.......
+    public int excluirArtista(Scanner sc){
 
         System.out.println(" Excluir artista");
         System.out.println(" -Artistas: " + DatabaseManager.GetAllArtists());
@@ -132,7 +136,7 @@ public class Menu {
 
         System.out.println("\n -Tem certeza que deseja excluir o artista: "+ DatabaseManager.GetArtistById(id));
         System.out.println("  (1)Sim\n  (2)Não");
-        int sn = t.nextInt();
+        int sn = sc.nextInt();
         if(sn == 1){
             DatabaseManager.DeleteArtist(id);
             System.out.println("\n -Artista excluido");
@@ -140,10 +144,10 @@ public class Menu {
             System.out.println(" \n -Cancelado");
         }
     
-        return voltarMenuExcluir(w);
+        return voltarMenuExcluir(sc);
     }
 
-    public int excluirAlbum(Scanner sc, Scanner t, Scanner w){
+    public int excluirAlbum(Scanner sc){
 
         System.out.println(" Excluir album");
         System.out.println(" -Albuns: " + DatabaseManager.GetAllAlbums());
@@ -153,17 +157,17 @@ public class Menu {
 
         System.out.println("\n -Tem certeza que deseja excluir o album: "+ DatabaseManager.GetAlbumById(id));
         System.out.println("  (1)Sim\n  (2)Não");
-        int sn = t.nextInt();
+        int sn = sc.nextInt();
         if(sn == 1){
             DatabaseManager.DeleteArtist(id);
             System.out.println("\n -Album excluido");
         }else{
             System.out.println(" \n -Cancelado");
         }
-        return voltarMenuExcluir(w);
+        return voltarMenuExcluir(sc);
     }
     
-    public int excluirMusica(Scanner sc, Scanner t, Scanner w){
+    public int excluirMusica(Scanner sc){
 
         System.out.println(" Excluir música");
         System.out.println(" -Músicas: " + DatabaseManager.GetAllTracks());
@@ -173,7 +177,7 @@ public class Menu {
 
         System.out.println("\n -Tem certeza que deseja excluir a música: "+ DatabaseManager.GetTrackById(id));
         System.out.println("  (1)Sim\n  (2)Não");
-        int sn = t.nextInt();
+        int sn = sc.nextInt();
         if(sn == 1){
             DatabaseManager.DeleteArtist(id);
             System.out.println("\n -Música excluida");
@@ -181,11 +185,11 @@ public class Menu {
             System.out.println(" \n -Cancelado");
         }
     
-        return voltarMenuExcluir(w);
+        return voltarMenuExcluir(sc);
     }
     /////////////////////////////////////////////////////////////////////////////
-
-    public int alterarArtista(Scanner sc, Scanner t, Scanner w){
+    /////ALTERAR...........
+    public int alterarArtista(Scanner sc){
 
         System.out.println(" Alterar artista");
         System.out.println(" -Artistas: " + DatabaseManager.GetAllArtists());
@@ -194,17 +198,17 @@ public class Menu {
         int id = sc.nextInt();
         sc.nextLine();
         System.out.print("\n -Novo nome: ");
-        String name = t.nextLine();
+        String name = sc.nextLine();
 
         System.out.println("\n -Antigo " + DatabaseManager.GetArtistById(id));
         DatabaseManager.UpdateArtist(id, name);
         System.out.println("\n -Novo " + DatabaseManager.GetArtistById(id));
 
-        return voltarMenuAlterar(w);
+        return voltarMenuAlterar(sc);
 
     }
 
-    public int alterarAlbum(Scanner sc, Scanner t, Scanner q, Scanner w){
+    public int alterarAlbum(Scanner sc){
 
         System.out.println(" Alterar album");
         System.out.println(" -Albuns: " + DatabaseManager.GetAllAlbums());
@@ -213,18 +217,18 @@ public class Menu {
         int id = sc.nextInt();
         sc.nextLine();
         System.out.print("\n -Novo nome: ");
-        String name = t.nextLine();
+        String name = sc.nextLine();
         System.out.print("\n -ID do artista(int):");
-        int idArtista = q.nextInt();
+        int idArtista = sc.nextInt();
 
         System.out.println("\n -Antigo " + DatabaseManager.GetAlbumById(id));
         DatabaseManager.UpdateAlbum(id, name, idArtista);
         System.out.println("\n -Novo " + DatabaseManager.GetAlbumById(id));
 
-        return voltarMenuAlterar(w);
+        return voltarMenuAlterar(sc);
     }
 
-    public int alteraMusica(Scanner sc, Scanner t, Scanner q, Scanner w){
+    public int alteraMusica(Scanner sc){
 
         System.out.println(" Alterar música");
         System.out.println(" -Músicas: " + DatabaseManager.GetAllTracks());
@@ -233,21 +237,80 @@ public class Menu {
         int id = sc.nextInt();
         sc.nextLine();
         System.out.print("\n -Novo nome: ");
-        String name = t.nextLine();
+        String name = sc.nextLine();
         System.out.print("\n -Nova duração:");
-        int duration = q.nextInt();
+        int duration = sc.nextInt();
 
         System.out.println("\n -Antigo " + DatabaseManager.GetTrackById(id));
         DatabaseManager.UpdateTrack(id, name, duration);
         System.out.println("\n -Novo " + DatabaseManager.GetTrackById(id));
 
-        return voltarMenuAlterar(w);
+        return voltarMenuAlterar(sc);
     }
 
-    public int voltarMenuPrincipal(Scanner w){
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    /////////CONSULTAR....
+
+    public int consultarArtista(Scanner sc){
+
+        System.out.println("\n Consultar artista");
+        System.out.println(  " (1)Lista completa\n" 
+                            +" (2)Consultar por ID\n");
+        int umOuDois = sc.nextInt();
+        int id;
+        if(umOuDois == 1){
+            System.out.println("\n -Lista de artistas\n" + DatabaseManager.GetAllArtists());
+        }else if(umOuDois == 2){
+            System.out.print("\n -ID: ");
+            id = sc.nextInt();
+            System.out.println("\n -Artista: " + DatabaseManager.GetArtistById(id));
+        }
+
+        return voltarMenuConsultar(sc);
+    }
+
+    public int consultarAlbum(Scanner sc){
+
+        System.out.println("\n Consultar album");
+        System.out.println(  " (1)Lista completa\n" 
+                            +" (2)Consultar por ID\n");
+        int umOuDois = sc.nextInt();
+        int id;
+        if(umOuDois == 1){
+            System.out.println("\n -Lista de album\n" + DatabaseManager.GetAllAlbums());
+        }else if(umOuDois == 2){
+            System.out.print("\n -ID: ");
+            id = sc.nextInt();
+            System.out.println("\n -Album: " + DatabaseManager.GetAlbumById(id));
+        }
+
+        return voltarMenuConsultar(sc);
+    }
+
+    public int consultarMusica(Scanner sc){
+
+        System.out.println("\n Consultar música");
+        System.out.println(  " (1)Lista completa\n" 
+                            +" (2)Consultar por ID\n");
+        int umOuDois = sc.nextInt();
+        int id;
+        if(umOuDois == 1){
+            System.out.println("\n -Lista de músicas\n" + DatabaseManager.GetAllTracks());
+        }else if(umOuDois == 2){
+            System.out.print("\n -ID: ");
+            id = sc.nextInt();
+            System.out.println("\n -Música: " + DatabaseManager.GetTrackById(id));
+        }
+
+        return voltarMenuConsultar(sc);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////
+
+    public int voltarMenuPrincipal(Scanner sc){
         System.out.println("\n (1)Menu Principal\n" 
                            + " (2)Fechar o Programa\n");
-        int continua = w.nextInt();
+        int continua = sc.nextInt();
 
         if(continua == 1)
             return 1;
@@ -256,11 +319,11 @@ public class Menu {
         }
     }
 
-    public int voltarMenuAdicionar(Scanner w){
+    public int voltarMenuAdicionar(Scanner sc){
         System.out.println("\n (1)Menu Adicionar\n" 
                            + " (2)Menu Principal\n"
                            + " (3)Fechar o Programa");
-        int continua = w.nextInt();
+        int continua = sc.nextInt();
 
         if(continua == 1)
             return 1;
@@ -271,11 +334,11 @@ public class Menu {
         }
     }
 
-    public int voltarMenuExcluir(Scanner w){
+    public int voltarMenuExcluir(Scanner sc){
         System.out.println("\n (1)Menu Excluir\n" 
                            + " (2)Menu Principal\n"
                            + " (3)Fechar o Programa");
-        int continua = w.nextInt();
+        int continua = sc.nextInt();
 
         if(continua == 1)
             return 1;
@@ -286,11 +349,26 @@ public class Menu {
         }
     }
 
-    public int voltarMenuAlterar(Scanner w){
+    public int voltarMenuAlterar(Scanner sc){
         System.out.println("\n (1)Menu Alterar\n" 
                            + " (2)Menu Principal\n"
                            + " (3)Fechar o Programa");
-        int continua = w.nextInt();
+        int continua = sc.nextInt();
+
+        if(continua == 1)
+            return 1;
+        else if(continua == 2){
+            return 2;
+        }else{
+            return 3;
+        }
+    }
+
+    public int voltarMenuConsultar(Scanner sc){
+        System.out.println("\n (1)Menu Consultar\n" 
+                           + " (2)Menu Principal\n"
+                           + " (3)Fechar o Programa");
+        int continua = sc.nextInt();
 
         if(continua == 1)
             return 1;
