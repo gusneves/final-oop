@@ -15,7 +15,6 @@ public class App {
             }catch(RuntimeException e){
                 System.out.println(menu.erro());
             }
-
            
             switch(opcao){
             case 1:    
@@ -44,43 +43,44 @@ public class App {
             do{
                 opcao = menu.excluir(sc);
                 switch(opcao){
-                    case 1: 
-                       
+                    case 1:     
+                        continua = menu.excluirArtista(sc, sc, sc);
                         break;
                     case 2: 
-                       
+                        continua = menu.excluirAlbum(sc, sc, sc);
                         break;
                     case 3: 
-                      
+                        continua = menu.excluirMusica(sc, sc, sc);
                         break;
                     case 4: 
                         // Gênero
                         //DatabaseManager.AddGenre(name);
                         break;
                 }
-
             }while(continua == 1);
             break;
 
-             /* 
+              
             case 3:
-                    System.out.println(menu.alterar());
-                    opcao = sc.nextInt();
-                    switch(opcao){
-                        case 1: 
-                            // Artista
-                            break;
-                        case 2: 
-                            // Album
-                            break;
-                        case 3: 
-                            // Música
-                            break;
-                        case 4: 
+            do{
+                opcao = menu.alterar(sc);
+                switch(opcao){
+                    case 1: 
+                        continua = menu.alterarArtista(sc, sc, sc);
+                        break;
+                    case 2: 
+                        continua = menu.alterarAlbum(sc, sc, sc, sc);
+                        break;
+                    case 3: 
+                         continua = menu.alteraMusica(sc, sc, sc, sc);
+                        break;
+                    case 4: 
                             // Gênero
-                            break;
-                    }
-                    break;
+                        break;
+                }
+            }while(continua == 1);
+            break;
+
                 case 4:
                     System.out.println(menu.consultar());
                     opcao = sc.nextInt();
@@ -100,11 +100,10 @@ public class App {
                     }
                     break;
             }
-        */
-        }
+        
 
-         
-        sc.close();
     }while(continua != 3);
+
+    sc.close();
     }
 }
