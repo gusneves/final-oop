@@ -31,32 +31,23 @@ public class DatabaseManager {
         return connection.prepareStatement(sql);
     }
 
-    /*
-     * private void insert(String sql) {
-     * connect();
-     * try {
-     * Statement statement = connection.createStatement();
-     * statement.execute(sql);
-     * } catch (SQLException e) {
-     * System.out.println(e.getMessage());
-     * } finally {
-     * close();
-     * }
-     * }
-     * 
-     * private ResultSet select(PreparedStatement stmt) {
-     * connect();
-     * ResultSet resultSet = null;
-     * try {
-     * resultSet = stmt.executeQuery();
-     * close();
-     * return resultSet;
-     * } catch (Exception e) {
-     * System.out.println(e.getMessage());
-     * }
-     * return resultSet;
-     * }
-     */
+    private static void executeUpdate(PreparedStatement preparedStatement) throws NotFoundIdException, SQLException {
+        int nrows = preparedStatement.executeUpdate();
+
+        if (nrows == 0) {
+            throw new NotFoundIdException("ID informado não encontrado");
+        }
+    }
+
+    private static ResultSet executeQuery(PreparedStatement preparedStatement)
+            throws NotFoundIdException, SQLException {
+        ResultSet rs = preparedStatement.executeQuery();
+        if (!rs.next()) {
+            throw new NotFoundIdException("ID informado não encontrado");
+        } else {
+            return rs;
+        }
+    }
 
     // GENRE
     public static void AddGenre(String name) {
@@ -68,6 +59,39 @@ public class DatabaseManager {
             preparedStatement.setString(1, name);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        close();
+    }
+
+    public static void UpdateGenre(int id, String name) {
+        connect();
+        String sql = "UPDATE genres SET name=? WHERE id=?";
+
+        try {
+            PreparedStatement preparedStatement = prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, id);
+            executeUpdate(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
+            System.out.println(e.getMessage());
+        }
+        close();
+    }
+
+    public static void DeleteGenre(int id) {
+        connect();
+        String sql = "DELETE FROM genres WHERE id=?";
+
+        try {
+            PreparedStatement preparedStatement = prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            executeUpdate(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
             System.out.println(e.getMessage());
         }
         close();
@@ -97,12 +121,14 @@ public class DatabaseManager {
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
+            ResultSet resultSet = executeQuery(preparedStatement);
+            do {
                 genre.setId(id);
                 genre.setName(resultSet.getString("name"));
-            }
+            } while (resultSet.next());
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
             System.out.println(e.getMessage());
         }
         close();
@@ -119,6 +145,39 @@ public class DatabaseManager {
             preparedStatement.setString(1, name);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        close();
+    }
+
+    public static void UpdateArtist(int id, String name) {
+        connect();
+        String sql = "UPDATE artists SET name=? WHERE id=?";
+
+        try {
+            PreparedStatement preparedStatement = prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, id);
+            executeUpdate(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
+            System.out.println(e.getMessage());
+        }
+        close();
+    }
+
+    public static void DeleteArtist(int id) {
+        connect();
+        String sql = "DELETE FROM artists WHERE id=?";
+
+        try {
+            PreparedStatement preparedStatement = prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            executeUpdate(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
             System.out.println(e.getMessage());
         }
         close();
@@ -148,12 +207,14 @@ public class DatabaseManager {
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
+            ResultSet resultSet = executeQuery(preparedStatement);
+            do {
                 artist.setId(id);
                 artist.setName(resultSet.getString("name"));
-            }
+            } while (resultSet.next());
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
             System.out.println(e.getMessage());
         }
         close();
@@ -171,6 +232,40 @@ public class DatabaseManager {
             preparedStatement.setInt(2, artistId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        close();
+    }
+
+    public static void UpdateAlbum(int id, String title, int artist_id) {
+        connect();
+        String sql = "UPDATE albums SET title=?, artist_id=? WHERE id=?";
+
+        try {
+            PreparedStatement preparedStatement = prepareStatement(sql);
+            preparedStatement.setString(1, title);
+            preparedStatement.setInt(2, artist_id);
+            preparedStatement.setInt(3, id);
+            executeUpdate(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
+            System.out.println(e.getMessage());
+        }
+        close();
+    }
+
+    public static void DeleteAlbum(int id) {
+        connect();
+        String sql = "DELETE FROM albums WHERE id=?";
+
+        try {
+            PreparedStatement preparedStatement = prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            executeUpdate(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
             System.out.println(e.getMessage());
         }
         close();
@@ -201,13 +296,15 @@ public class DatabaseManager {
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
+            ResultSet resultSet = executeQuery(preparedStatement);
+            do {
                 album.setId(id);
                 album.setTitle(resultSet.getString("title"));
                 album.setArtistId(resultSet.getInt("artist_id"));
-            }
+            } while (resultSet.next());
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
             System.out.println(e.getMessage());
         }
         close();
@@ -226,6 +323,40 @@ public class DatabaseManager {
             preparedStatement.setInt(3, duration);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        close();
+    }
+
+    public static void UpdateTrack(int id, String name, int duration) {
+        connect();
+        String sql = "UPDATE tracks SET name=?, duration=? WHERE id=?";
+
+        try {
+            PreparedStatement preparedStatement = prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, duration);
+            preparedStatement.setInt(3, id);
+            executeUpdate(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
+            System.out.println(e.getMessage());
+        }
+        close();
+    }
+
+    public static void DeleteTrack(int id) {
+        connect();
+        String sql = "DELETE FROM tracks WHERE id=?";
+
+        try {
+            PreparedStatement preparedStatement = prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            executeUpdate(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
             System.out.println(e.getMessage());
         }
         close();
@@ -257,14 +388,16 @@ public class DatabaseManager {
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
+            ResultSet resultSet = executeQuery(preparedStatement);
+            do {
                 track.setId(id);
                 track.setName(resultSet.getString("name"));
                 track.setAlbumId(resultSet.getInt("album_id"));
                 track.setDuration(resultSet.getInt("duration"));
-            }
+            } while (resultSet.next());
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NotFoundIdException e) {
             System.out.println(e.getMessage());
         }
         close();
