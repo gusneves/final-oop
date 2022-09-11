@@ -40,28 +40,28 @@ public class App {
             break;
         
             case 2:
-            do{
-                opcao = menu.excluir(sc);
-                switch(opcao){
-                    case 1:     
-                        continua = menu.excluirArtista(sc);
+                do{
+                    opcao = menu.excluir(sc);
+                    switch(opcao){
+                        case 1:     
+                            continua = menu.excluirArtista(sc);
+                            break;
+                        case 2: 
+                            continua = menu.excluirAlbum(sc);
+                            break;
+                        case 3: 
+                            continua = menu.excluirMusica(sc);
+                            break;
+                        case 4: 
+                            continua = menu.excluirGenero(sc);
+                            break;
+                        case 5:
+                            continua = 2;
                         break;
-                    case 2: 
-                        continua = menu.excluirAlbum(sc);
-                        break;
-                    case 3: 
-                        continua = menu.excluirMusica(sc);
-                        break;
-                    case 4: 
-                        continua = menu.excluirGenero(sc);
-                        break;
-                    case 5:
-                        continua = 2;
-                    break;
-                    default:
-                        menu.erro();
-                        continua = 1;
-                }
+                        default:
+                            menu.erro();
+                            continua = 1;
+                    }
             }while(continua == 1);
             break;
 
@@ -131,8 +131,6 @@ public class App {
 
     }while(continua != 3);
     
-
-
     sc.close();
     }
 }

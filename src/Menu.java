@@ -35,8 +35,8 @@ public class Menu {
                  in = sc.nextInt();
                  error = false;
              }catch(Exception e){
-                 System.out.print(" Valor inválido, utilizar inteiros(int)." 
-                                + "-Tente novamente\n"); 
+                 System.out.println(" Valor inválido, utilizar inteiros(int).\n" 
+                                + " -Tente novamente\n"); 
                  sc.nextLine();               
              }
          }
@@ -243,7 +243,7 @@ public class Menu {
     }
 
     /////////////////////////////////////////////////////////////////////////////
-    ///// ALTERAR...........
+    /////// ALTERAR........
     public int alterarArtista(Scanner sc) {
         sc.nextLine();
         System.out.println(" Alterar artista");
@@ -335,7 +335,7 @@ public class Menu {
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////
-    ///////// CONSULTAR....
+    ///////// CONSULTAR......
 
     public int consultarArtista(Scanner sc) {
         sc.nextLine();
@@ -395,6 +395,7 @@ public class Menu {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////
+    ////// Menus de retorno
 
     public int voltarMenuPrincipal(Scanner sc) {
         System.out.println("\n (1)Menu Principal\n"
