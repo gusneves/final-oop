@@ -8,7 +8,7 @@ public class Menu {
                 + "  (1) Adicionar\n"
                 + "  (2) Excluir  \n"
                 + "  (3) Alterar  \n"
-                + "  (4) Consultar\n"
+                + "  (4) Consultar e Imprimir\n"
                 + "  (5) Sair     \n");
         int opcao = testaInteiro(sc);
         return opcao;
@@ -276,6 +276,7 @@ public class Menu {
         sc.nextLine();
         System.out.print("\n -Novo nome: ");
         String name = sc.nextLine();
+        list(DatabaseManager.GetAllArtists());
         System.out.print("\n -ID do artista:");
         int idArtista = testaInteiro(sc);
 
@@ -291,7 +292,7 @@ public class Menu {
         sc.nextLine();
         System.out.println(" Alterar música");
         System.out.println(" -Músicas: ");
-        list(DatabaseManager.GetAllTracks()); // <<<< ERROR NÃO IMPRIME A LISTA
+        list(DatabaseManager.GetAllTracks()); 
 
         System.out.print("\n -ID da música: ");
         int id = testaInteiro(sc);
@@ -300,8 +301,12 @@ public class Menu {
         String name = sc.nextLine();
         System.out.print("\n -Nova duração:");
         int duration = testaInteiro(sc);
+        System.out.println("\n -Albuns:");
+        list(DatabaseManager.GetAllAlbums());
         System.out.print("\n -ID do album: ");
         int albumId = testaInteiro(sc);
+        System.out.println("\n -Gêneros:");
+        list(DatabaseManager.GetAllGenres());
         System.out.print("\n -ID do genero: ");
         int genreId = testaInteiro(sc);
 
@@ -337,13 +342,13 @@ public class Menu {
 
     public int consultarArtista(Scanner sc) {
         sc.nextLine();
-        System.out.println("\n Consultar artista");
-        System.out.println(" (1)Lista completa\n"
-                + " (2)Consultar por ID\n");
+        System.out.println("\n Consultar artista\n");
+        System.out.println(" (1)Imprimir lista completa\n"
+                         + " (2)Consultar por ID\n");
         int umOuDois = testaInteiro(sc);
         int id;
         if (umOuDois == 1) {
-            System.out.println("\n -Lista de artistas\n");
+            System.out.println("\n -Lista de artistas");
             list(DatabaseManager.GetAllArtists());
         } else if (umOuDois == 2) {
             System.out.print("\n -ID: ");
@@ -356,13 +361,13 @@ public class Menu {
 
     public int consultarAlbum(Scanner sc) {
         sc.nextLine();
-        System.out.println("\n Consultar album");
-        System.out.println(" (1)Lista completa\n"
-                + " (2)Consultar por ID\n");
+        System.out.println("\n Consultar album\n");
+        System.out.println(" (1)Imprimir lista completa\n"
+                         + " (2)Consultar por ID\n");
         int umOuDois = testaInteiro(sc);
         int id;
         if (umOuDois == 1) {
-            System.out.println("\n -Lista de album\n");
+            System.out.println("\n -Lista de albuns");
             list(DatabaseManager.GetAllAlbums());
         } else if (umOuDois == 2) {
             System.out.print("\n -ID: ");
@@ -375,13 +380,13 @@ public class Menu {
 
     public int consultarMusica(Scanner sc) {
         sc.nextLine();
-        System.out.println("\n Consultar música");
-        System.out.println(" (1)Lista completa\n"
-                + " (2)Consultar por ID\n");
+        System.out.println("\n Consultar música\n");
+        System.out.println(" (1)Imprimir lista completa\n"
+                         + " (2)Consultar por ID\n");
         int umOuDois = testaInteiro(sc);
         int id;
         if (umOuDois == 1) {
-            System.out.println("\n -Lista de músicas\n");
+            System.out.println("\n -Lista de músicas");
             list(DatabaseManager.GetAllTracks());
         } else if (umOuDois == 2) {
             System.out.print("\n -ID: ");
@@ -394,13 +399,13 @@ public class Menu {
 
     public int consultarGenero(Scanner sc) {
         sc.nextLine();
-        System.out.println("\n Consultar gênero");
-        System.out.println(" (1)Lista completa\n"
-                + " (2)Consultar por ID\n");
+        System.out.println("\n Consultar gênero\n");
+        System.out.println(" (1)Imprimir lista completa\n"
+                         + " (2)Consultar por ID\n");
         int umOuDois = testaInteiro(sc);
         int id;
         if (umOuDois == 1) {
-            System.out.println("\n -Lista de gênetos\n");
+            System.out.println("\n -Lista de gênetos");
             list(DatabaseManager.GetAllGenres());
         } else if (umOuDois == 2) {
             System.out.print("\n -ID: ");
@@ -412,18 +417,6 @@ public class Menu {
     }
     /////////////////////////////////////////////////////////////////////////////////////////////
     ////// Menus de retorno
-
-    public int voltarMenuPrincipal(Scanner sc) {
-        System.out.println("\n (1)Menu Principal\n"
-                + " (2)Fechar o Programa\n");
-        int continua = testaInteiro(sc);
-
-        if (continua == 1)
-            return 1;
-        else {
-            return 0;
-        }
-    }
 
     public int voltarMenuAdicionar(Scanner sc) {
         System.out.println("\n (1)Voltar menu Adicionar\n"

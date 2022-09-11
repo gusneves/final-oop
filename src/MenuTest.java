@@ -4,9 +4,8 @@ import org.junit.Test;
 
 public class MenuTest {
 
-    // JUnit, existe um teste de cada para testar a entrada de dados correta que retorna o resultado
-    //esperado e a entrada incorreta de dados do tipo String q recebe int levando a exceção
-
+    // JUnit, testando a entrada de parametro(int) do método com entrada de int (expected: sucesso) e entrada de String (expected: Excecão)
+ 
     @Test // Teste de entrada de dados correta do método menu.principal();
     public void principal(){
         Menu menu = new Menu();
