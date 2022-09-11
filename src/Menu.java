@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +15,7 @@ public class Menu {
     }
 
     public String opcoes() {
-        return  "\n (1) Artista \n"
+        return "\n (1) Artista \n"
                 + " (2) Album   \n"
                 + " (3) Música  \n"
                 + " (4) Gênero  \n"
@@ -27,20 +26,20 @@ public class Menu {
         System.out.println("-Opção não é válida, tente de novo.");
     }
 
-    public int testaInteiro(Scanner sc){
+    public int testaInteiro(Scanner sc) {
         int in = 0;
         boolean error = true;
-        while(error == true){
-            try{
-                 in = sc.nextInt();
-                 error = false;
-             }catch(Exception e){
-                 System.out.println(" Valor inválido, utilizar inteiros(int).\n" 
-                                + " -Tente novamente\n"); 
-                 sc.nextLine();               
-             }
-         }
-         return in;
+        while (error == true) {
+            try {
+                in = sc.nextInt();
+                error = false;
+            } catch (Exception e) {
+                System.out.println(" Valor inválido, utilizar inteiros(int).\n"
+                        + " -Tente novamente\n");
+                sc.nextLine();
+            }
+        }
+        return in;
     }
 
     public int adicionar(Scanner sc) {
@@ -122,12 +121,12 @@ public class Menu {
         System.out.println("\n -A música \"" + name + "\" é de qual genero?");
         System.out.println(" -Generos: ");
         list(DatabaseManager.GetAllGenres());
-        
+
         System.out.print("\n -ID do genero: ");
         int genreId = testaInteiro(sc);
-     
+
         DatabaseManager.AddTrack(name, albumId, genreId, duration);
-        System.out.println("\n >Música \"" + name + " \" adicionada<");
+        System.out.println("\n >Música \"" + name + "\" adicionada<");
         list(DatabaseManager.GetAllTracks());
 
         return voltarMenuAdicionar(sc);
@@ -156,8 +155,8 @@ public class Menu {
         System.out.print("\n -ID do artista: ");
         int id = testaInteiro(sc);
 
-        System.out.println("\n -Tem certeza que deseja excluir o artista: " 
-                              + DatabaseManager.GetArtistById(id).toString());
+        System.out.println("\n -Tem certeza que deseja excluir o artista: "
+                + DatabaseManager.GetArtistById(id).toString());
         System.out.println("  (1)Sim\n  (2)Não");
         int sn = testaInteiro(sc);
         if (sn == 1) {
@@ -180,14 +179,14 @@ public class Menu {
         System.out.print("\n -ID do album: ");
         int id = testaInteiro(sc);
 
-        System.out.println("\n -Tem certeza que deseja excluir o album: " 
-                            + DatabaseManager.GetAlbumById(id).toString());
-        System.out.println("  (1)Sim\n  (2)Não"); 
+        System.out.println("\n -Tem certeza que deseja excluir o album: "
+                + DatabaseManager.GetAlbumById(id).toString());
+        System.out.println("  (1)Sim\n  (2)Não");
         int sn = testaInteiro(sc);
         if (sn == 1) {
-            DatabaseManager.DeleteArtist(id);
+            DatabaseManager.DeleteAlbum(id);
             System.out.println("\n -Album excluido");
-            list(DatabaseManager.GetAllArtists());
+            list(DatabaseManager.GetAllAlbums());
         } else {
             System.out.println(" \n -Cancelado");
         }
@@ -204,11 +203,11 @@ public class Menu {
         int id = testaInteiro(sc);
 
         System.out.println("\n -Tem certeza que deseja excluir a música: "
-                             + DatabaseManager.GetTrackById(id).toString());
+                + DatabaseManager.GetTrackById(id).toString());
         System.out.println("  (1)Sim\n  (2)Não");
         int sn = testaInteiro(sc);
         if (sn == 1) {
-            DatabaseManager.DeleteArtist(id);
+            DatabaseManager.DeleteTrack(id);
             System.out.println("\n -Música excluida");
             list(DatabaseManager.GetAllTracks());
         } else {
@@ -227,8 +226,8 @@ public class Menu {
         System.out.print("\n -ID do gênero: ");
         int id = testaInteiro(sc);
 
-        System.out.println("\n -Tem certeza que deseja excluir o gênero: " 
-                  + DatabaseManager.GetGenreById(id).toString());
+        System.out.println("\n -Tem certeza que deseja excluir o gênero: "
+                + DatabaseManager.GetGenreById(id).toString());
         System.out.println("  (1)Sim\n  (2)Não");
         int sn = testaInteiro(sc);
         if (sn == 1) {
@@ -258,7 +257,7 @@ public class Menu {
 
         System.out.println("\n <Antigo " + DatabaseManager.GetArtistById(id).toString());
         DatabaseManager.UpdateArtist(id, name);
-        System.out.println(" >Novo " + DatabaseManager.GetArtistById(id).toString()+"\n");
+        System.out.println(" >Novo " + DatabaseManager.GetArtistById(id).toString() + "\n");
         list(DatabaseManager.GetAllArtists());
 
         return voltarMenuAlterar(sc);
@@ -281,7 +280,7 @@ public class Menu {
 
         System.out.println("\n <Antigo " + DatabaseManager.GetAlbumById(id).toString());
         DatabaseManager.UpdateAlbum(id, name, idArtista);
-        System.out.println(" >Novo " + DatabaseManager.GetAlbumById(id).toString()+"\n");
+        System.out.println(" >Novo " + DatabaseManager.GetAlbumById(id).toString() + "\n");
         list(DatabaseManager.GetAllAlbums());
 
         return voltarMenuAlterar(sc);
@@ -291,7 +290,7 @@ public class Menu {
         sc.nextLine();
         System.out.println(" Alterar música");
         System.out.println(" -Músicas: ");
-        list(DatabaseManager.GetAllTracks()); //   <<<<   ERROR NÃO IMPRIME A LISTA
+        list(DatabaseManager.GetAllTracks()); // <<<< ERROR NÃO IMPRIME A LISTA
 
         System.out.print("\n -ID da música: ");
         int id = testaInteiro(sc);
@@ -307,7 +306,7 @@ public class Menu {
 
         System.out.println("\n <Antigo " + DatabaseManager.GetTrackById(id).toString());
         DatabaseManager.UpdateTrack(id, name, albumId, genreId, duration);
-        System.out.println(" >Novo " + DatabaseManager.GetTrackById(id).toString()+"\n");
+        System.out.println(" >Novo " + DatabaseManager.GetTrackById(id).toString() + "\n");
         list(DatabaseManager.GetAllTracks());
 
         return voltarMenuAlterar(sc);
@@ -325,14 +324,13 @@ public class Menu {
         System.out.print("\n -Novo nome: ");
         String name = sc.nextLine();
 
-        System.out.println("\n <Antigo " + DatabaseManager.GetAlbumById(id).toString());
+        System.out.println("\n <Antigo " + DatabaseManager.GetGenreById(id).toString());
         DatabaseManager.UpdateGenre(id, name);
-        System.out.println(" >Novo " + DatabaseManager.GetAlbumById(id).toString()+"\n");
+        System.out.println(" >Novo " + DatabaseManager.GetGenreById(id).toString() + "\n");
         list(DatabaseManager.GetAllGenres());
 
         return voltarMenuAlterar(sc);
     }
-
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     ///////// CONSULTAR......
@@ -365,7 +363,7 @@ public class Menu {
         int id;
         if (umOuDois == 1) {
             System.out.println("\n -Lista de album\n");
-            list(DatabaseManager.GetAllArtists());
+            list(DatabaseManager.GetAllAlbums());
         } else if (umOuDois == 2) {
             System.out.print("\n -ID: ");
             id = testaInteiro(sc);
@@ -384,7 +382,7 @@ public class Menu {
         int id;
         if (umOuDois == 1) {
             System.out.println("\n -Lista de músicas\n");
-            list(DatabaseManager.GetAllArtists());
+            list(DatabaseManager.GetAllTracks());
         } else if (umOuDois == 2) {
             System.out.print("\n -ID: ");
             id = testaInteiro(sc);

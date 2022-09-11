@@ -1,3 +1,4 @@
+
 import static org.junit.Assert.assertEquals;
 
 import java.util.Scanner;
@@ -5,9 +6,9 @@ import java.util.Scanner;
 import org.junit.Test;
 
 public class MenuTest {
-    
+
     @Test // Teste do método menu.principal();
-    public void testPrincipal(){
+    public void testPrincipal() {
         Menu menu = new Menu();
         Scanner sc = new Scanner("1");
 
@@ -15,7 +16,7 @@ public class MenuTest {
     }
 
     @Test // Teste do método menu.adicionar();
-    public void testAdicionar(){
+    public void testAdicionar() {
         Menu menu = new Menu();
         Scanner sc = new Scanner("2");
 
@@ -23,7 +24,7 @@ public class MenuTest {
     }
 
     @Test // Teste do método menu.excluir();
-    public void testExcluir(){
+    public void testExcluir() {
         Menu menu = new Menu();
         Scanner sc = new Scanner("3");
 
@@ -31,7 +32,7 @@ public class MenuTest {
     }
 
     @Test // Teste do método menu.alterar();
-    public void testAlterar(){
+    public void testAlterar() {
         Menu menu = new Menu();
         Scanner sc = new Scanner("4");
 
@@ -39,7 +40,7 @@ public class MenuTest {
     }
 
     @Test // Teste do método menu.consultar();
-    public void testConsultar(){
+    public void testConsultar() {
         Menu menu = new Menu();
         Scanner sc = new Scanner("5");
 

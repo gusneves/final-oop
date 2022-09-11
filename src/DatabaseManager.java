@@ -2,9 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-// import java.sql.ResultSet;
 import java.sql.SQLException;
-// import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DatabaseManager {
@@ -88,7 +86,7 @@ public class DatabaseManager {
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            executeUpdate(preparedStatement);    
+            executeUpdate(preparedStatement);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } catch (NotFoundIdException e) {
@@ -314,15 +312,16 @@ public class DatabaseManager {
     }
 
     // TRACK
-    public static void AddTrack(String name, int album_id, int genreId, int duration) {
+    public static void AddTrack(String name, int albumId, int genreId, int duration) {
         connect();
         String sql = "INSERT INTO tracks(name, album_id, genre_id, duration) VALUES (?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
             preparedStatement.setString(1, name);
-            preparedStatement.setInt(2, album_id);
-            preparedStatement.setInt(3, duration);
+            preparedStatement.setInt(2, albumId);
+            preparedStatement.setInt(3, genreId);
+            preparedStatement.setInt(4, duration);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

@@ -19,6 +19,6 @@ public class Genre extends BaseEntity {
 
     @Override
     public String toString() {
-        return " ID: " + id + ", Nome: " + name;
+        return " ID: " + id + " - Nome: " + name;
     }
 }
