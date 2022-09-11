@@ -312,9 +312,9 @@ public class DatabaseManager {
     }
 
     // TRACK
-    public static void AddTrack(String name, int album_id, int duration) {
+    public static void AddTrack(String name, int album_id, int genreId, int duration) {
         connect();
-        String sql = "INSERT INTO tracks(name, album_id, duration) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO tracks(name, album_id, genre_id, duration) VALUES (?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
@@ -328,15 +328,17 @@ public class DatabaseManager {
         close();
     }
 
-    public static void UpdateTrack(int id, String name, int duration) {
+    public static void UpdateTrack(int id, String name, int albumId, int genreId, int duration) {
         connect();
-        String sql = "UPDATE tracks SET name=?, duration=? WHERE id=?";
+        String sql = "UPDATE tracks SET name=?, duration=?, album_id=?, genre_id=? WHERE id=?";
 
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
             preparedStatement.setString(1, name);
             preparedStatement.setInt(2, duration);
-            preparedStatement.setInt(3, id);
+            preparedStatement.setInt(3, albumId);
+            preparedStatement.setInt(4, genreId);
+            preparedStatement.setInt(5, id);
             executeUpdate(preparedStatement);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -383,7 +385,7 @@ public class DatabaseManager {
 
     public static Track GetTrackById(int id) {
         connect();
-        String sql = "SELECT id, name, album_id, duration FROM tracks WHERE id=?";
+        String sql = "SELECT id, name, album_id, genre_id duration FROM tracks WHERE id=?";
         Track track = new Track();
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
@@ -393,6 +395,7 @@ public class DatabaseManager {
                 track.setId(id);
                 track.setName(resultSet.getString("name"));
                 track.setAlbumId(resultSet.getInt("album_id"));
+                track.setGenreId(resultSet.getInt("genre_id"));
                 track.setDuration(resultSet.getInt("duration"));
             } while (resultSet.next());
         } catch (SQLException e) {

@@ -1,6 +1,8 @@
 public class Track extends BaseEntity {
     private String name;
     private int albumId;
+    private int genreId;
+
     private int duration;
 
     public Track() {
@@ -35,6 +37,14 @@ public class Track extends BaseEntity {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public int getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(int genreId) {
+        this.genreId = genreId;
     }
 
     @Override
