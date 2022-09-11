@@ -6,7 +6,7 @@ public class App {
 
         Menu menu = new Menu();
         int opcao = 0;
-        int continua = 2;
+        int continua = 0;
 
         do {
             opcao = menu.principal(sc);
@@ -104,7 +104,7 @@ public class App {
                                 continua = menu.consultarMusica(sc);
                                 break;
                             case 4:
-                                // Gênero
+                            continua = menu.consultarGenero(sc);
                                 break;
                             case 5:
                                 continua = 2;
@@ -113,7 +113,6 @@ public class App {
                                 menu.erro();
                                 continua = 1;
                         }
-
                     } while (continua == 1);
                     break;
 
@@ -123,12 +122,10 @@ public class App {
 
                 default:
                     menu.erro();
-                    continua = 2;
+                    continua = 0;
                     break;
             }
-
         } while (continua != 3);
-
         sc.close();
     }
 }
