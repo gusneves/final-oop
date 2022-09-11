@@ -81,20 +81,22 @@ public class DatabaseManager {
         close();
     }
 
-    public static void DeleteGenre(int id) {
+    public static int DeleteGenre(int id) {
         connect();
         String sql = "DELETE FROM genres WHERE id=?";
 
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            executeUpdate(preparedStatement);
+            executeUpdate(preparedStatement);    
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } catch (NotFoundIdException e) {
             System.out.println(e.getMessage());
+            return 0;
         }
         close();
+        return 1;
     }
 
     public static ArrayList<Genre> GetAllGenres() {

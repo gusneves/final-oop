@@ -8,14 +8,20 @@ public class App {
         Menu menu = new Menu();
         int opcao = 0;
         int continua = 2;
+        boolean error = true;
 
+        
         do{
-           try{
-                opcao = menu.principal(sc);
-            }catch(RuntimeException e){
-                System.out.println(menu.erro());
-            }
-           
+            while(error == true){
+               try{
+                    opcao = menu.principal(sc);
+                    error = false;
+                }catch(Exception e){
+                    System.out.println("Valor inválido, tente novamente"); 
+                    sc.nextLine();               
+                }
+            };
+            
             switch(opcao){
             case 1:    
                 do{
@@ -31,9 +37,14 @@ public class App {
                             continua = menu.addMusica(sc);
                             break;
                         case 4: 
-                            // Gênero
+                            continua = menu.addGenero(sc);
+                            break;
+                        case 5:
+                            continua = 2;
                             break;
                         default:
+                            System.out.println("-Opção não é válida, tente de novo.");
+                            continua = 1;
                     }
                 }while(continua == 1);
             break;
@@ -52,8 +63,14 @@ public class App {
                         continua = menu.excluirMusica(sc);
                         break;
                     case 4: 
-                        // Gênero
+                        continua = menu.excluirGenero(sc);
                         break;
+                    case 5:
+                        continua = 2;
+                    break;
+                    default:
+                        System.out.println("-Opção não é válida, tente de novo.");
+                        continua = 1;
                 }
             }while(continua == 1);
             break;
@@ -72,8 +89,14 @@ public class App {
                             continua = menu.alteraMusica(sc);
                             break;
                          case 4: 
-                            // Gênero
+                            continua = menu.alterarGenero(sc);
                             break;
+                        case 5:
+                            continua = 2;
+                        break;
+                        default:
+                            System.out.println("-Opção não é válida, tente de novo.");
+                            continua = 1;
                     }
                 }while(continua == 1);
                 break;
@@ -94,6 +117,12 @@ public class App {
                         case 4: 
                             // Gênero
                             break;
+                        case 5:
+                            continua = 2;
+                            break;
+                        default:
+                            System.out.println("-Opção não é válida, tente de novo.");
+                            continua = 1;
                         }
                 
                 }while(continua == 1);
@@ -104,11 +133,15 @@ public class App {
                     break;
                 
                 default:
-                    System.out.println("\n -Opção não é válida\n -Tente novamente");
+                    System.out.println("-Opção não é válida, tente de novo.");
                     continua = 2;
                     break;
             }
+
+
     }while(continua != 3);
+    
+
 
     sc.close();
     }

@@ -50,6 +50,6 @@ public class Track extends BaseEntity {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Nome: " + name + ", ID do album: " + albumId + ", Duração (s): " + duration;
+        return " ID: " + id + ", Nome: " + name + ", ID do album: " + albumId + ", Duração (s): " + duration;
     }
 }
