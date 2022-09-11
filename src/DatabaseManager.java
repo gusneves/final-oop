@@ -366,7 +366,7 @@ public class DatabaseManager {
 
     public static ArrayList<Track> GetAllTracks() {
         connect();
-        String sql = "SELECT id, name, album_id, duration FROM tracks";
+        String sql = "SELECT id, name, album_id, genre_id, duration FROM tracks";
         ArrayList<Track> tracks = new ArrayList<Track>();
         try {
             PreparedStatement preparedStatement = prepareStatement(sql);
@@ -374,6 +374,7 @@ public class DatabaseManager {
             while (resultSet.next()) {
                 tracks.add(
                         new Track(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getInt("album_id"),
+                                resultSet.getInt("genre_id"),
                                 resultSet.getInt("duration")));
             }
         } catch (SQLException e) {

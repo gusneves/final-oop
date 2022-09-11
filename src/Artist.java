@@ -19,6 +19,6 @@ public class Artist extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Artist [id=" + id + ", name=" + name + "]";
+        return "ID: " + id + ", Nome: " + name;
     }
 }

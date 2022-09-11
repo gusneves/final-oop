@@ -29,6 +29,6 @@ public class Album extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Album [id=" + id + ", title=" + title + ", artistId=" + artistId + "]";
+        return "ID: " + id + ", Título: " + title + ", ID do artista: " + artistId;
     }
 }
