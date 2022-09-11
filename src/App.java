@@ -8,19 +8,9 @@ public class App {
         Menu menu = new Menu();
         int opcao = 0;
         int continua = 2;
-        boolean error = true;
-
-        
+ 
         do{
-            while(error == true){
-               try{
-                    opcao = menu.principal(sc);
-                    error = false;
-                }catch(Exception e){
-                    System.out.println("Valor inválido, tente novamente"); 
-                    sc.nextLine();               
-                }
-            };
+            opcao = menu.principal(sc);
             
             switch(opcao){
             case 1:    
@@ -43,7 +33,7 @@ public class App {
                             continua = 2;
                             break;
                         default:
-                            System.out.println("-Opção não é válida, tente de novo.");
+                            menu.erro();
                             continua = 1;
                     }
                 }while(continua == 1);
@@ -69,7 +59,7 @@ public class App {
                         continua = 2;
                     break;
                     default:
-                        System.out.println("-Opção não é válida, tente de novo.");
+                        menu.erro();
                         continua = 1;
                 }
             }while(continua == 1);
@@ -95,7 +85,7 @@ public class App {
                             continua = 2;
                         break;
                         default:
-                            System.out.println("-Opção não é válida, tente de novo.");
+                            menu.erro();
                             continua = 1;
                     }
                 }while(continua == 1);
@@ -121,7 +111,7 @@ public class App {
                             continua = 2;
                             break;
                         default:
-                            System.out.println("-Opção não é válida, tente de novo.");
+                            menu.erro();
                             continua = 1;
                         }
                 
@@ -133,7 +123,7 @@ public class App {
                     break;
                 
                 default:
-                    System.out.println("-Opção não é válida, tente de novo.");
+                    menu.erro();
                     continua = 2;
                     break;
             }
