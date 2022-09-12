@@ -26,7 +26,7 @@ public class Menu {
         System.out.println("-Opção não é válida, tente de novo.");
     }
 
-    //testaInteiros() realiza grande parte do tratamento de exceção do sistema
+    //testaInteiros() tratamento de exceção em grande parte do sistema
     public int testaInteiro(Scanner sc) {
         int in = 0;
         boolean error = true;
@@ -262,7 +262,6 @@ public class Menu {
         list(DatabaseManager.GetAllArtists());
 
         return voltarMenuAlterar(sc);
-
     }
 
     public int alterarAlbum(Scanner sc) {
@@ -338,7 +337,7 @@ public class Menu {
         return voltarMenuAlterar(sc);
     }
     ///////////////////////////////////////////////////////////////////////////////////////////
-    ///////// CONSULTAR......
+    ///////// CONSULTAR e IMPRIMIR......
 
     public int consultarArtista(Scanner sc) {
         sc.nextLine();

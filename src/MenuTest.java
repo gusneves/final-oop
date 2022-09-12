@@ -3,7 +3,6 @@ import java.util.Scanner;
 import org.junit.Test;
 
 public class MenuTest {
-
     // JUnit, testando a entrada de parametro(int) do método com entrada de int (expected: sucesso) e entrada de String (expected: Excecão)
  
     @Test // Teste de entrada de dados correta do método menu.principal();

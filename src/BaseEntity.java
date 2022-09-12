@@ -1,4 +1,6 @@
-public abstract class BaseEntity {
+
+
+public abstract class BaseEntity { // classe Abstrata
     protected int id;
 
     public BaseEntity(int id) {
